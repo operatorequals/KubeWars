@@ -4,6 +4,7 @@ import random
 import json
 import os
 import ipaddress
+import sys
 
 PORT = 7587
 
@@ -20,11 +21,11 @@ def log(line):
 
 def await_shots():    
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-        s.bind(('0.0.0.0', port))
+        s.bind(('0.0.0.0', PORT))
         s.listen()
         conn, addr = s.accept()
         with conn:
-            log({"code":500, "by":addr})
+            log({"code":500, "by":addr[0]})
 
 def shoot():
     while(True):
@@ -61,9 +62,12 @@ if __name__ == '__main__':
     
     random.seed(SEED)
     
-    for i in range(FIRERATE):
-        threading.Thread(target=shoot).start()
+    for i in range(int(FIRERATE)):
+        s = threading.Thread(target=shoot)
+        s.daemon = True
+        s.start()
 
     bot.start()
     bot.join()
+    sys.exit()
 
