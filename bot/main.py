@@ -27,6 +27,7 @@ def await_shots():
         with conn:
             log({"code":500, "by":addr[0]})
 
+
 def shoot():
     while(True):
         try:
@@ -41,20 +42,30 @@ def shoot():
         except:
             log({"code":404, "whom":ip})
 
-if __name__ == '__main__':
-    SEED = os.getenv('SEED')
-    FIRERATE = os.getenv('FIRERATE')
-    TARGETLIST = os.getenv('TARGETS')
 
-    TARGETS = []
+def __target_list(target_list_str):
+    targets = []
 
-    for t in TARGETLIST.split(','):
+    for t in target_list_str.split(','):
         if('/' in t):
             net = ipaddress.ip_network(t)
-            for h in net.hosts:
-                TARGETS.append(str(ipaddress.ip_address(h)))
+            for h in net.hosts():
+                targets.append(str(ipaddress.ip_address(h)))
         else:
-            TARGETS.append(str(ipaddress.ip_address(t)))
+            targets.append(str(ipaddress.ip_address(t)))
+
+    return targets
+
+
+if __name__ == '__main__':
+    HP = os.getenv('HP')
+    DAMAGE = os.getenv('DAMAGE')
+    FIRERATE = os.getenv('FIRERATE')
+
+    SEED = os.getenv('SEED')
+    TARGETLIST = os.getenv('TARGETS')
+
+    TARGETS = __target_list(TARGETLIST)
     
     log({"code":100})
     
