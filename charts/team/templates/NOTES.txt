@@ -1,0 +1,11 @@
+---------------------------
+
+Team "{{ .Values.team.name }}" is deployed!
+
+NAME	FIRERATE	DAMAGE	HP
+{{- range .Values.team.members }}
+{{ .name }}	{{ .fireRateHz }}		{{ .damage }} 	{{ .hp }}
+{{- end }}
+
+Good Luck...
+---------------------------

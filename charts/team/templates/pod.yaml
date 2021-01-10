@@ -1,0 +1,33 @@
+{{- range .Values.team.members }}
+apiVersion: v1
+kind: Pod
+metadata:
+  name: {{ .name }}-{{ lower $.Values.team.name }}-kubewars-bot
+  labels:
+    name: {{ .name }}
+    team: {{ $.Values.team.name }}
+    app: kubewars-bot
+spec:
+  restartPolicy: Never
+  containers:
+  - name: {{ .name }}-container
+    image: "{{ $.Values.image.repository }}:{{ $.Values.image.tag | default $.Chart.AppVersion }}"
+    env:
+      - name: FIRERATE
+        value: "{{ .fireRateHz | default 1 }}"
+      - name: DAMAGE
+        value: "{{ .damage | default 1 }}"
+      - name: HP
+        value: "{{ .hp | default 1 }}"
+
+      - name: SEED
+        value: ""
+      - name: TARGETS
+        value: "{{ include "helm-toolkit.utils.joinListWithComma" .targets }}"
+    ports:
+      - name: kubewars
+        containerPort: 7587
+        protocol: TCP
+  serviceAccount: ""
+---
+{{- end }}
