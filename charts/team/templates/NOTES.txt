@@ -1,6 +1,7 @@
 ---------------------------
 
 Team "{{ .Values.team.name }}" is deployed!
+The passphrase is {{ include "team.password" $ | quote }}
 
 NAME	FIRERATE	DAMAGE	HP
 {{- range .Values.team.members }}

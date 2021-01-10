@@ -6,7 +6,7 @@ image:
   repository: "kubewars-bot"
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "0.1.0"
+  # tag: "0.1.0"
 
 team:
   name: "Blue"
@@ -24,12 +24,8 @@ team:
     damage: 3
     fireRateHz: 5
     targets:
-      - "172.17.0.0/16"
 
   - name: smith
     hp: 999
     fireRateHz: 5
     targets:
-      - "172.17.0.0/16"
-
-seed: ""

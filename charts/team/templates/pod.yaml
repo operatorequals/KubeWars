@@ -1,3 +1,8 @@
+# Random Team password
+{{- define "team.password" -}}
+{{ lower ($.Values.team.passphrase | default $.Values.team.name) }}
+{{- end -}}
+
 {{- range .Values.team.members }}
 apiVersion: v1
 kind: Pod
@@ -20,8 +25,11 @@ spec:
       - name: HP
         value: "{{ .hp | default 1 }}"
 
+      - name: FRIENDLY_FIRE
+        value: "{{ $.Values.team.friendlyFire | default "False" }}"
       - name: SEED
-        value: ""
+        value: "{{ include "team.password" $ | sha256sum }}"
+
       - name: TARGETS
         value: "{{ include "helm-toolkit.utils.joinListWithComma" .targets }}"
     ports:
