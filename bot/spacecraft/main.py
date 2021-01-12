@@ -136,7 +136,7 @@ def connection_graphic(braille_graphic = None, while_ = 'True'):
 def hit(host):
     if host:
         with open(KUBEWARS_FILE,'w') as f:
-            f.write(json.dumps({"attack": TARGET_HOST, "time":time.time()}))
+            f.write(json.dumps({"target": TARGET_HOST, "time":time.time()}))
 
 def hit_bar():
     for i in range(100):

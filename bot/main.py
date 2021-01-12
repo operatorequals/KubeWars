@@ -4,10 +4,13 @@ import random
 import json
 import os
 import ipaddress
+import pathlib
 import sys
 import time
 from http.server import BaseHTTPRequestHandler, HTTPServer
 import binascii
+
+KUBEWARS_FILE = '/tmp/kubewars.ui'
 
 def __target_list(target_list_str):
     targets = []
@@ -89,18 +92,38 @@ def await_shots():
     die()
 
 
-def shoot():
+def shoot(ip):
+    try:
+        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        s.settimeout(1/FIRERATE)
+        s.connect((ip, PORT))
+        s.sendall(MISSILE * DAMAGE)
+        
+        log({"code":200, "target":ip, "damage":DAMAGE})
+        return True
+    except:
+        log({"code":404, "target":ip})
+        return False
+
+
+def shoot_thread():
+    kubewars_file = pathlib.Path(KUBEWARS_FILE)
     while(True):
-        try:
-            s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        target_str = ""
+        if kubewars_file.exists():
+            with kubewars_file.open('r') as f:
+                target_str = f.read()
+            with kubewars_file.open('w') as f:
+                f.write("")
+
+                if target_str:
+                    print(target_str, target_str.splitlines())
+                    ip = json.loads(target_str.splitlines()[0])['target']
+                else:
+                    continue
+        else:
             ip = random.choice(TARGETS)
-            s.settimeout(1/FIRERATE)
-            s.connect((ip, PORT))
-            s.sendall(MISSILE * DAMAGE)
-            
-            log({"code":200, "target":ip, "damage":DAMAGE})
-        except:
-            log({"code":404, "target":ip})
+        shoot(ip)
 
 # ===========
 
@@ -144,7 +167,7 @@ if __name__ == '__main__':
     status_srv_thr.daemon = True
     status_srv_thr.start()
 
-    shoot_thr = threading.Thread(target=shoot)
+    shoot_thr = threading.Thread(target=shoot_thread)
     shoot_thr.daemon = True
     shoot_thr.start()
 
