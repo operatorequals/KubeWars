@@ -113,9 +113,16 @@ class MyServer(BaseHTTPRequestHandler):
         self.wfile.write(
             bytes(json.dumps(
             {
+            "app":"KubeWars",
             "HP":{"total":HP,"remaining": REMAINING_HP,
             "percent":int((REMAINING_HP/HP)*100)},
-            "missile":MISSILE.hex()
+            "missile":MISSILE.hex(),
+            "host": str(IPADDRESS),
+            "stats": {
+                "firerate": FIRERATE,
+                "damage": DAMAGE
+                },
+            "secret": SEED
             }
                 ),
             "utf8")
