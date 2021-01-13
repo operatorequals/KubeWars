@@ -8,8 +8,12 @@ Its audience probably is all these DevOps and SRE Teams around the technical wor
 that would enjoy a break for shooting some enemy Spacecraft Pods, just before
 going about debugging that Jenkins issue again.
 
+## Demo
 
-### Description
+Deploy your Team and Get In!
+[![asciicast](https://asciinema.org/a/384292.svg)](https://asciinema.org/a/384292)
+
+## Description
 
 Several Spacecrafts tagged in Teams are entering the Kubernetes cluster as Pods,
 flying around the TCP layer. They can be targeted by their cluster IP addresses.
@@ -35,8 +39,3 @@ kubectl exec -ti jacob-blue-kubewars-bot -- spacecraft
 From there you can enter the "_Search and Destroy_" mode, by selecting the target spacecraft
 by IP and shooting using SPACE.
 
-
-## Demo
-
-Deploy your Team and Get In!
-[![asciicast](https://asciinema.org/a/384292.svg)](https://asciinema.org/a/384292)
