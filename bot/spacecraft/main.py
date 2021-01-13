@@ -141,11 +141,11 @@ def hit(host):
 def hit_bar():
     for i in range(100):
         FIRE_GAUGE.value = i
-        time.sleep(0.0015)
+        time.sleep(0.002)
     FIRE_GAUGE.border_color=3
     for i in range(100):
         FIRE_GAUGE.value = 100-i
-        time.sleep(0.0015)
+        time.sleep(0.002)
     FIRE_GAUGE.border_color=1
     FIRE_GAUGE.value = -100
 
@@ -282,11 +282,11 @@ def display_ui():
     while True:
         if i % 24 == 0:
             status = __get_status()
+            STATUS_TEXT.text = json.dumps(status, indent = 1, separators=(',', ':'))
         i += 1
         if status is None:
             continue
 
-        STATUS_TEXT.text = json.dumps(status, indent = 1, separators=(': ',':'))
         hp = status["HP"]["percent"]
 
         HP_GAUGE.value = hp
