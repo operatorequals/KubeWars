@@ -27,8 +27,7 @@ def __target_list(target_list_str):
 
 # ===========
 
-with os.popen("hostname -i") as p:
-    IPADDRESS = ipaddress.ip_address(p.read().strip())
+IPADDRESS = socket.gethostbyname(socket.gethostname())
 
 # Clear empty Env Vars for the defaults to override them
 for k,v in os.environ.items():
