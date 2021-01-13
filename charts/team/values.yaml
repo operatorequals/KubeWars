@@ -31,7 +31,7 @@ team:
     fireRateHz: 16
 
   #! The tank "olly"
-  - name: smith
+  - name: olly
     hp: 1024
     damage: 1
     fireRateHz: 1
