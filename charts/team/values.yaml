@@ -1,30 +1,45 @@
-# Default values for bot.
-# This is a YAML-formatted file.
-# Declare variables to be passed into your templates.
-
 image:
-  repository: "kube-wars/bot"
+  repository: "operatorequals/kubewars-bot"
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
+  #   Tags have a format of {lang}-{semVer} (e.g py-0.5.2)
   # tag: "latest"
 
 team:
-  name: "Red"
+  name: "SampleTeam"
   friendlyFire: false
-# Comment out for a password based on the Team name:
+# Comment out for a password based on the Team name (not recommended)
+# Use this to mount the spacecrafts!
 #  passphrase: "Myteam1sRAD123"
+
+  #! The all-around "bob"
   members:
   - name: bob
-    hp: 2
-    damage: 3
+    hp: 10
+    damage: 8
     fireRateHz: 5
-  # Comment out to auto-detect the /16 network
+  # Sets specific targets as IPs and subnets.
+  #   Comment out to auto-detect the /16 network
     # targets:
     # - "10.96.0.1/24"
     # - "10.58.1.1"
 
+  #! The heavy Damage per Second "jacob"
+  - name: jacob
+    hp: 1
+    damage: 25
+    fireRateHz: 16
+
+  #! The tank "olly"
   - name: smith
-    fireRateHz: 5
-    targets:
-    - "10.96.0.1/24"
-    - "10.58.1.1"
+    hp: 1024
+    damage: 1
+    fireRateHz: 1
+
+  #! The ideal-ride "smith"
+  - name: smith
+    hp: 12
+    damage: 16
+    fireRateHz: 1
+
+#!   Happy hunting!
