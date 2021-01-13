@@ -3,10 +3,9 @@ FROM python:3.7-alpine
 WORKDIR /app
 EXPOSE 7587
 
-COPY bot/main.py bot.py
-
 RUN pip install dashing
 
+COPY bot/main.py bot.py
 COPY bot/spacecraft/main.py spacecraft
 
 RUN chmod +x spacecraft && \
