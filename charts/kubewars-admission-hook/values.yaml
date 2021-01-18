@@ -1,0 +1,61 @@
+# Default values for kubewars-admission-hook.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+# To provide this value for your cluster run:
+#   kubectl config view --raw --minify --flatten -o jsonpath='{.clusters[].cluster.certificate-authority-data}' | tr -d '\r\n'
+caBundle: "LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURCakNDQWU2Z0F3SUJBZ0lCQVRBTkJna3Foa2lHOXcwQkFRc0ZBREFWTVJNd0VRWURWUVFERXdwdGFXNXAKYTNWaVpVTkJNQjRYRFRJeE1ERXdOakV6TWpVME0xb1hEVE14TURFd05URXpNalUwTTFvd0ZURVRNQkVHQTFVRQpBeE1LYldsdWFXdDFZbVZEUVRDQ0FTSXdEUVlKS29aSWh2Y05BUUVCQlFBRGdnRVBBRENDQVFvQ2dnRUJBS3FoCjdCaTNJNkQ0d3VJdG8rWEhvVjJCT3kvTDJBdG82bEpxVjhnOU1ENlpzL0w0Z1VNWVZxampCcDNwdmlhWFA5d1IKbk1DQ2tQK3dWUE1RWUc1eDFtb1FLOWYrMWNZZnFOaGU3dG0ycE5mb0w1UjF4L0ROS0pVdE5ycnNVaDBWS1J1SQpDZkU1cDR3SzRQNTYrUXhwT0x2bTMweWVETjhwVG1COVJ2elN3dXVGelV0bzVtUE8yMHFCWFpVMWxpWGxuR3V5CktTNlNzL1c5YU5uV0dLUTFoNGNZV3ZrZEdtMFNyOEwxMHp3SmtpVFMwSkRzbkZyd1pFQVpjMTF1MURzelRRckYKcXlVUndSTVZsckI0MGpGQXZxOU9vZEExR3oyZWE4NXl6UmVqRHpvcUdPNGE4WWpoTkcwYy9qUTFteSt3Y1pxMgppY1U5U3hLcjgwR0xJNTd5YU5rQ0F3RUFBYU5oTUY4d0RnWURWUjBQQVFIL0JBUURBZ0trTUIwR0ExVWRKUVFXCk1CUUdDQ3NHQVFVRkJ3TUNCZ2dyQmdFRkJRY0RBVEFQQmdOVkhSTUJBZjhFQlRBREFRSC9NQjBHQTFVZERnUVcKQkJRZjhmU05XSW9Cdk9wcUpEbzFSUEw4UjJET1lUQU5CZ2txaGtpRzl3MEJBUXNGQUFPQ0FRRUFJVTQxaVBwcQpXK1JOaVQ3YzlZbElsWndxWmMxYVlmQ2luUzczWnkzZlErdW1LendPTDNpTkVMM3dQYlZlZXpTejRISWMyRFJqCjlIWlRVNjlYTjBkcDJUangvQnJTM3FZa2RoR2pVQWF2cXBmc2JjWmlyN3BDdDJKNUNHdVZqTUY5clZyR3lkZFIKWmlQMXNLREFZdTZ4MnNwdTVjNlVxQWUrVG8vMXpyUU9wSUxhZ2Y1OGhPQVA0Yi82RERQU09tMjB6SzZzT2l6VApqUlgzUHEwaWZjS0h4WHR1N0pOMzZDcS8rNEwrSWU5MzhCVVExV2ppdk16ZWFweFNEc29qYy85d0FLYXVyYSsxCjFyTWw3aDVwWTE5QmJjUGgvLzZmVWxoOWE2OThXYnpocDVKcENCU1h2STZEc2YxVUJxaUxNcHlIeEl0VFpaRE0KKy9oOHFHOVJZVFpiaGc9PQotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0tCg=="
+
+image:
+  repository: kubewars-admission-webhook
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: "0.0.1"
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: true
+  # Annotations to add to the service account
+  annotations: {}
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: ""
+
+podAnnotations: {}
+
+podSecurityContext: {}
+  # fsGroup: 2000
+
+securityContext: {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
+tls:
+  cert: ""
+  key: ""
+
+resources: {}
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}

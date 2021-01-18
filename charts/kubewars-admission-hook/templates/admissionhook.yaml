@@ -1,0 +1,26 @@
+---
+apiVersion: admissionregistration.k8s.io/v1beta1
+kind: MutatingWebhookConfiguration
+metadata:
+  name: kubewars-admission-hook-{{ .Release.Name }}
+  labels:
+    app: kubewars-admission-hook-{{ .Release.Name }}
+webhooks:
+  - name: kubewars-admission-hook-{{ .Release.Name }}-svc.{{ .Release.Namespace }}.svc.cluster.local
+    clientConfig:
+      service:
+        name: kubewars-admission-hook-{{ .Release.Name }}-svc
+        namespace: {{ .Release.Namespace }}
+        path: "/mutate"
+      caBundle: {{ .Values.caBundle }}
+    rules:
+      - operations: ["CREATE"]
+        apiGroups: [""]
+        apiVersions: ["v1"]
+        resources: ["pods"]
+    namespaceSelector:
+      matchLabels:
+        kubewars: enabled
+        kubewars-battleground: {{ .Release.Name }}
+        kubewars-webhook: "kubewars-admission-hook-{{ .Release.Name }}-svc.{{ .Release.Namespace }}.svc.cluster.local"
+    failurePolicy: Fail

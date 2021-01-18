@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: "{{ include "kubewars-admission-hook.fullname" . }}-test-connection"
+  labels:
+    {{- include "kubewars-admission-hook.labels" . | nindent 4 }}
+  annotations:
+    "helm.sh/hook": test
+spec:
+  containers:
+    - name: wget
+      image: busybox
+      command: ['wget']
+      args: ['{{ include "kubewars-admission-hook.fullname" . }}:8443']
+  restartPolicy: Never

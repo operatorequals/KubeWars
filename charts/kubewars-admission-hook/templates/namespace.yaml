@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: kubewars-battleground-{{ .Release.Name }}
+  labels:
+    kubewars: enabled
+    kubewars-battleground: {{ .Release.Name }}
+    kubewars-webhook: "kubewars-admission-hook-{{ .Release.Name }}-svc.{{ .Release.Namespace }}.svc.cluster.local"

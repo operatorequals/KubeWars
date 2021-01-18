@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: kubewars-admission-hook-{{ .Release.Name }}-svc
+  labels:
+    app: kubewars-admission-hook
+spec:
+  ports:
+  - port: 443
+    targetPort: 8443
+  selector:
+    app: kubewars-admission-hook-{{ .Release.Name }}
