@@ -116,7 +116,6 @@ def shoot_thread():
                 f.write("")
 
                 if target_str:
-                    print(target_str, target_str.splitlines())
                     ip = json.loads(target_str.splitlines()[0])['target']
                 else:
                     continue

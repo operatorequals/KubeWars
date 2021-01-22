@@ -172,6 +172,7 @@ def __target_thread(while_ = 'TARGET_HOST'):
     while eval(while_):
         enemy_status = __get_status(TARGET_HOST)
         if enemy_status is None:
+            __unset_target_nav()
             continue
         TARGET_TEXT.text = "Refreshing..."
         time.sleep(0.2)
